@@ -2,23 +2,8 @@
 
 These are the materials for my workshop on creating interactive data visualization with D3!
 
-I would love your feedback on the materials in the Github [issues](https://github.com/Jay-Oh-eN/hands-on-d3/issues).
 
 And please do not hesitate to reach out to me directly via email at jondinu@gmail.com or over twitter @clearspandex
-
-> Throughout this workshop, you will learn how to make this interactive parallel coordinate plot of environmental conditions related to incidences of Asthma in SF.
-
-## Quickstart
-
-To download the necessary files, parse the data, and transform the fields to get ready for the visualization you can use `make`.  Details of each command can be found in the [Makefile](Makefile):
-
-    make all            run all the stages
-    make download       download data archive files from S3
-    make update         update archive files with any new data
-    make parse          parse the JSON archive files into CSV
-    make transform      transform the data to add dB, hour, and name columns
-    make figures        generate EDA plots: violin, summary stats, etc.
-    make clean          delete all files created from scripts (start over)
 
 ## Getting Setup
 
@@ -45,7 +30,6 @@ __If you need some help with Javascript or D3, refer to the [tutorials](#resourc
 
 ### Libraries Used
 * [D3.js][d3]
-* [Parallel Coordinates][parallel]
 
 ## The Data
 
