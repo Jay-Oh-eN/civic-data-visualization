@@ -33,7 +33,7 @@ def map_names(df, map):
 if __name__ == '__main__':
     df = pd.read_csv('data/data.csv')
     df = df[pd.notnull(df.sound)]
-    df['sound'] = df.sound.astype(int)
+    df['sound'] = df.sound.astype(float)
     df = create_features(df)
     df = map_names(df, sensor_map)
     df.to_csv('data/transform.csv', index=False)
