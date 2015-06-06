@@ -33,41 +33,18 @@ __If you need some help with Javascript or D3, refer to the [tutorials](#resourc
 
 ## The Data
 
-The [data][data-canvas-map] is from the [Data Canvas][data-canvas] project, which is sponsored by [Gray Area][grayarea], [swissnex San Francisco][swiss], and [Lift][lift].  It contains data from 14 sensors in 7 cities which collect and stream information about their environment (temperature, dust, pollution, humidity, light, etc.).
+The [data](http://www.zillow.com/research/data/#zri) is from Zillow and is calculated according to their [methodology](http://www.zillow.com/research/zillow-rent-index-methodology-2393/).
 
-You an access a bulk download of all the data (100+ MB) [here][dump].  You can also download samples or access the stream through the API (details on the [data page][data-canvas-data]).
+The files are comma separated with headers with each column representing a given neighborhood in SF:
 
-![][data-canvas-img]
-
-There are 4 different granularities of measurement. Files ending in:
-* `*-5md.csv`: measurements every 5 minutes for a day
-* `*-1hd.csv`: measurements every 1 hour for a day
-* `*-6hw.csv`: measurements every 6 hours for a week
-* `grapealope.csv`: entire history of the sensor near Noe Valley at 10 second resolution
-
-The files are comma separated with headers and 8 fields:
-
-timestamp|city|temperature|light|airquality_raw|sound|humidity|dust
-:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:
-2015-02-16T17:00:00.000Z|San Francisco|20.8856185354523|2231.45801048026|28.8458008730416|1674.71050009727|48.4880466992298|882.367404134883
-2015-02-16T18:00:00.000Z|San Francisco|21.8623045793052|2542.46720508251|26.5113633058142|1652.25960948903|43.9341875396295|912.0280753969
-2015-02-16T19:00:00.000Z|San Francisco|23.5113166041101|3215.03460441893|24.8987852323788|1690.5842506536|40.5058249680354|939.447105875158
-2015-02-16T20:00:00.000Z|San Francisco|25.6472096479114|4558.69142401972|26.0867059045864|1704.29832357106|38.4312464272035|999.743066983922
+month|Mission|Bernal Heights | Excelsior| ... |
+:--:|:--:|:--:|:--:|:--:|
+2014-01|4.21124828532236|2.32484076433121|1.50130548302872| ... |
+2014-02|4.13333333333333|2.54726368159204|1.225| ... |
+2014-03|4.54921422663358|2.70212765957447|2.25225225225225| ... |
+... | ... | ... | ... | ... |
 
 <hr>
-
-## Goals
-
-By the end of this workshop you should be able to:
-
-* Describe the data visualization process and the difference between explanatory and exploratory visualizations
-* Understand the Javascript functions, closures and callbacks
-* Know how to load multiple data files with D3
-* Determine the best chart type for your type of data
-* Create author driven narratives with animation (`setInterval()`)
-* Create engaging user interaction through Javascript events such as dragging, hovering, and clicking
-* Tie this interaction into a reader driven narrative
-* Contextualize your data through the use of secondary datasets
 
 ## Visualization Examples
 
