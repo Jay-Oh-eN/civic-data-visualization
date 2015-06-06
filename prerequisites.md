@@ -6,8 +6,8 @@ Thanks for signing up for the workshop! The workshop will assume some basic fami
 
 First things first, bring a laptop and it will be helpful if you have:
 
-- **text editor:** my favorite isÂ [Sublime Text](http://www.sublimetext.com/2)
-- **modern web browser:** my favorite isÂ [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
+- **text editor:** my favorite is [Sublime Text](http://www.sublimetext.com/2)
+- **modern web browser:** my favorite is [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
 - **HTTP Web Server:**  
   - Unix/OSX should have one by default (`python -m SimpleHTTPServer`).
   - If the `python -m SimpleHTTPServer` command doesn't work on Windows, you will need a server like [Mongoose](http://cesanta.com/mongoose.shtml)
@@ -20,7 +20,7 @@ Also, you'll be better prepared if you have a basic understanding of the technol
 
 > Am I prepared?
 
-If you can understand Mike Bostock's [Let's Make a Bar Chart](http://bost.ocks.org/mike/bar/) tutorial you will be in a very good place for this workshop.  If not, please review some of the resources below.
+If you can understand Mike Bostock's [Let's Make a Bar Chart](http://bost.ocks.org/mike/bar/) tutorial you will be in a very good place for this workshop.  If not, please review as many of the resources below.
 
 #### Resources
 
