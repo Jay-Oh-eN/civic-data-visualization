@@ -37,10 +37,16 @@
         stroke: black;
       }
 
-      .bar {
+      circle {
         opacity: 0.9;
         stroke: none;
-        fill: steelblue;
+        fill: red;
+      }
+
+      .line {
+        fill: none;
+        stroke: #4eb0bb;
+        stroke-width: 1px;
       }
     </style>
 
@@ -59,16 +65,15 @@
           var width = 1400 - margin.left - margin.right,
               height = 800 - margin.top - margin.bottom;
 
-          var barPadding = 10;
-
           // specify the radius of our circles and the
           // column we want to plot
-          var field = 'Van Ness - Civic Center';
+          var radius = 3,
+              field = 'Van Ness - Civic Center';
         
           // Append the title for the graph
           d3.select("body")
               .append("h2")
-              .text("Civic Center Median Rent")
+              .text(field + "Median Rent")
               .attr('class', 'title');
 
           // append the SVG tag with height and width to accommodate for margins
@@ -85,14 +90,13 @@
             return d[field];
           });
 
-          // bind our data to svg rects for the bar plot
-          svg.selectAll(".bar")
+          // bind our data to svg circles for the scatter plot
+          svg.selectAll("circle")
               .data(data)
               .enter()
-              .append("rect")
-                .attr('class', 'bar')
+              .append("circle")
 
-            // maximum price for rent
+            // maximum price
             var max_y = d3.max(data, function(d) {
                 return +d[field];
             });
@@ -137,24 +141,31 @@
             d3.select(".y.axis")
                 .append("text")
                 .attr('class', 'label')
-                .text("Price (dollar/sq-ft)")
+                .text("Pollution (mV)")
                 .attr("transform", "rotate(-90, -43, 0) translate(-400)");
 
-            // based on the data bound to each svg rect,
-            // change its x, y, width, height accordingly
-            d3.selectAll('.bar')
-                .attr('x', function(d) {
+            // based on the data bound to each svg circle,
+            // change its center-x (cx) and center-y (cy)
+            // coordinates
+            d3.selectAll('circle')
+                .attr('cx', function(d) {
                     return time_scale(format.parse(d['month']));
                 })
-                .attr('width', function(d) {
-                    return width / data.length - barPadding;
-                })
-                .attr('y', function(d) {
+                .attr('cy', function(d) {
                     return measure_scale(+d[field]);
                 })
-                .attr('height', function(d) {
-                    return height - measure_scale(+d[field]);
-                });
+                .attr('r', radius);
+
+            // define the values to map for x and y position of the line
+            var line = d3.svg.line()
+                         .x(function(d) { return time_scale(format.parse(d['month'])); })
+                         .y(function(d) { return measure_scale(+d[field]); });
+
+            // append a SVG path that corresponds to the line chart
+            svg.append("path")
+              .datum(data)
+              .attr("class", "line")
+              .attr("d", line);
         };
       </script>
   </head>

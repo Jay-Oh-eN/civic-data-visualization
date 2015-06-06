@@ -3,82 +3,166 @@
 <head>
   <meta charset="utf-8">
   <script src="lib/d3.js"></script>
-  <script src="lib/dimple.js"></script>
-  <script>
-    function draw(bangalore) {
-    "use strict";
+    <style>
+      body {
+        font-family: futura;
+      }
 
-    /*
-        D3.js setup code
-    */
+      h2.title {
+        color: black;
+        text-align: center;
+      }
 
-    // set margins according to Mike Bostock's margin conventions
-    // http://bl.ocks.org/mbostock/3019563
-    var margin = {top: 25, right: 40, bottom: 150, left: 25};
+      .axis {
+        font-family: arial;
+        font-size: 0.7em;
+      }
 
-    // set height and width of chart
-    var width = 1400 - margin.left - margin.right,
-        height = 800 - margin.top - margin.bottom;
+      text {
+        fill: black;
+      }
 
-    // append the SVG tag with height and width to accommodate for margins
-    // This is where dimple will draw our chart
-    var svg = d3.select("body")
-                .append("svg")
-                  .attr("width", width + margin.left + margin.right)
-                  .attr("height", height + margin.top + margin.bottom)
-                .append('g')
-                    .attr('class','chart')
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .label {
+        font-size: 2em;
+      }
 
-      // asynchronously load a second dataset
-      d3.csv('data/shanghai-1hw.csv', function(shanghai) {
-          // concatenate our two data files into one
-          var data = bangalore.concat(shanghai);
+      path {
+        fill: none;
+        stroke: black;
+        stroke-width: 2px;
+      }
 
-          /*
-            Dimple.js Chart construction code
-          */
+      .tick {
+        fill: none;
+        stroke: black;
+      }
 
-          // initialize a new chart to be rendered in the svg
-          var myChart = new dimple.chart(svg, data);
+      .bar {
+        opacity: 0.9;
+        stroke: none;
+        fill: steelblue;
+      }
+    </style>
 
-          // set our margins appropriately
-          myChart.setMargins(margin.left, margin.top, margin.right, margin.bottom)
+    <script type="text/javascript">
+      // https://github.com/mbostock/d3/wiki/Time-Formatting
+      format = d3.time.format("%Y-%m");
 
-          // second argument has to match column name
-          var x = myChart.addTimeAxis("x", "timestamp");
+      function draw(data) {
+          "use strict";
+          debugger;
+          // set margins according to Mike Bostock's margin conventions
+          // http://bl.ocks.org/mbostock/3019563
+          var margin = {top: 25, right: 40, bottom: 150, left: 75};
 
-          // second argument has to match column name
-          myChart.addMeasureAxis("y", "airquality_raw");
+          // set height and width of chart
+          var width = 1400 - margin.left - margin.right,
+              height = 800 - margin.top - margin.bottom;
 
-          // https://github.com/mbostock/d3/wiki/Time-Formatting
-          // (2015-02-16T17:00:00.000Z) -- ISO 8601
-          x.dateParseFormat = "%Y-%m-%dT%H:%M:%S.%LZ";
+          var barPadding = 10;
 
-          // set the styling of the x-axis ticks
-          x.tickFormat = "%m/%d (%H:%M)";
-          x.timePeriod = d3.time.hours;
-          x.timeInterval = 4
+          // specify the radius of our circles and the
+          // column we want to plot
+          var field = 'Van Ness - Civic Center';
+        
+          // Append the title for the graph
+          d3.select("body")
+              .append("h2")
+              .text("Civic Center Median Rent")
+              .attr('class', 'title');
 
-          // the first argument specifies the column we want
-          // to facet (group) on and the second argument is
-          // the chart type we want to create
-          var line = myChart.addSeries('city', dimple.plot.line);
-          
-          // once we have properly set the properties and data of our chart
-          // we render it into the svg
-          myChart.draw();
-      });
-    }
-  </script>
-</head>
+          // append the SVG tag with height and width to accommodate for margins
+          var svg = d3.select("body")
+                      .append("svg")
+                          .attr("width", width + margin.left + margin.right)
+                          .attr("height", height + margin.top + margin.bottom)
+                      .append('g')
+                          .attr('class','chart')
+                          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          // remove missing values
+          data = data.filter(function(d) {
+            return d[field];
+          });
+
+          // bind our data to svg rects for the bar plot
+          svg.selectAll(".bar")
+              .data(data)
+              .enter()
+              .append("rect")
+                .attr('class', 'bar')
+
+            // maximum price for rent
+            var max_y = d3.max(data, function(d) {
+                return +d[field];
+            });
+
+            // get min/max dates
+            var time_extent = d3.extent(data, function(d){
+                return format.parse(d['month']);
+            });
+
+            // Create x-axis scale mapping dates -> pixels
+            var time_scale = d3.time.scale()
+                .range([0, width])
+                .domain(time_extent);
+
+            // Create y-axis scale mapping price -> pixels
+            var measure_scale = d3.scale.linear()
+                .range([height, 0])
+                .domain([0, max_y]);
+
+            // Create D3 axis object from time_scale for the x-axis
+            var time_axis = d3.svg.axis()
+                .scale(time_scale)
+                .tickFormat(d3.time.format("%b %y"));
+
+            // Create D3 axis object from measure_scale for the y-axis
+            var measure_axis = d3.svg.axis()
+                .scale(measure_scale)
+                .orient("left");
+
+            // Append SVG to page corresponding to the D3 x-axis
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', "translate(0," + height + ")")
+                .call(time_axis);
+
+            // Append SVG to page corresponding to the D3 y-axis
+            svg.append('g')
+                .attr('class', 'y axis')
+                .call(measure_axis);
+
+            // add label to y-axis
+            d3.select(".y.axis")
+                .append("text")
+                .attr('class', 'label')
+                .text("Price (dollar/sq-ft)")
+                .attr("transform", "rotate(-90, -43, 0) translate(-400)");
+
+            // based on the data bound to each svg rect,
+            // change its x, y, width, height accordingly
+            d3.selectAll('.bar')
+                .attr('x', function(d) {
+                    return time_scale(format.parse(d['month']));
+                })
+                .attr('width', function(d) {
+                    return width / data.length - barPadding;
+                })
+                .attr('y', function(d) {
+                    return measure_scale(+d[field]);
+                })
+                .attr('height', function(d) {
+                    return height - measure_scale(+d[field]);
+                });
+        };
+      </script>
+  </head>
   <body>
-    <script>
-      /*
-      Use D3 (not dimple.js) to load the CSV file
-      and pass the contents of it to the draw function
-      */
-      d3.csv("data/bangalore-1hw.csv", draw);
+    <script type="text/javascript">
+    // load our data file asynchronously and pass the data
+    // to the draw function once it is loaded.
+    d3.csv("../data/zillow_median_rent_pct_sf.csv", draw);
     </script>
   </body>
 </html>
