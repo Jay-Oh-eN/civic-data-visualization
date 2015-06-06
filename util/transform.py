@@ -47,4 +47,4 @@ if __name__ == '__main__':
         agg['hour'] = agg.index.map(lambda t: t.hour)
         agg['name'] = name
         agg = agg[pd.notnull(agg.db)]
-        agg.to_csv('data/csv/30sec_agg_' + name + '.csv')
+        agg.to_csv('data/csv/agg/30sec_agg_' + name + '.csv')
