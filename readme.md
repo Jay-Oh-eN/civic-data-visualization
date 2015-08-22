@@ -1,6 +1,6 @@
 # Civic Impact Through Data Visualization
 
-These are the materials for my workshop on creating interactive data visualization with D3!
+These are the materials for my workshop on creating interactive data visualizations with D3!
 
 
 And please do not hesitate to reach out to me directly via email at jondinu@gmail.com or over twitter @clearspandex
