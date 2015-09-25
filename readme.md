@@ -19,7 +19,7 @@ Once you have downloaded the software above, you are ready to start making some 
 
 ![](http://media2.giphy.com/media/rOTGSPxvJJY7m/giphy.gif)
 
-1. Get the files: Download the [ZIP][zip] or `git clone https://github.com/Jay-Oh-eN/hands-on-d3.git` (git [tutorial][gitit]) this repository.
+1. Get the files: Download the [ZIP][zip] or `git clone https://github.com/Jay-Oh-eN/civic-data-visualization.git` (git [tutorial][gitit]) this repository.
 2. Start you HTTP web server
     * If using a `SimpleHTTPServer`, navigate into the repository folder (`hands-on-d3`) on your machine before you start the server.
     * If using Mongoose, set the 'Shared Directory' to be the repository folder.
