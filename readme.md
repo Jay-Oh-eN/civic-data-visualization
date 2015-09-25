@@ -103,7 +103,7 @@ By the end of this workshop you should be able to:
 
 #### [Seven Modern Remakes Of The Most Famous Graphs Ever Made][plotly-remake]
 
-![][plotly-img]
+![napolean](http://i.imgur.com/wgYtD37.png)
 
 ## Next Steps
 * [Visual Storytelling with D3 (Ritchie King)][ritchie]
