@@ -101,6 +101,10 @@ By the end of this workshop you should be able to:
 
 ![][flights-img]
 
+#### [Seven Modern Remakes Of The Most Famous Graphs Ever Made][plotly-remake]
+
+![][plotly-img]
+
 ## Next Steps
 * [Visual Storytelling with D3 (Ritchie King)][ritchie]
 * [Data Visualization and D3.js (Udacity)][udacity]
@@ -202,6 +206,8 @@ Rights of examples and screenshots of data visualizations belong to the authors 
 [viz-ani]: images/viz-ani.gif
 [flights]: http://fivethirtyeight.com/interactives/flights/
 [flights-img]: images/flights.png
+[plotly-remake]: http://blog.plot.ly/post/120532468127/how-to-analyze-data-seven-modern-remakes-of-the
+[plotly-img]: images/plotly.png
 
 [udacity]: https://www.udacity.com/course/ud507
 [uw-viz]: http://courses.cs.washington.edu/courses/cse512/14wi/
