@@ -101,7 +101,7 @@ By the end of this workshop you should be able to:
 
 ![][flights-img]
 
-#### [Seven Modern Remakes Of The Most Famous Graphs Ever Made][plotly-remake]
+#### [Seven Modern Remakes Of The Most Famous Graphs Ever Made][plotly-remake] (Plotly)
 
 ![napolean](http://i.imgur.com/wgYtD37.png)
 
