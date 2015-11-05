@@ -66,10 +66,7 @@
           var field = 'Van Ness - Civic Center';
         
           // Append the title for the graph
-          d3.select("body")
-              .append("h2")
-              .text("Civic Center Median Rent")
-              .attr('class', 'title');
+          d3.select("body").append("h2").text("Civic Center Median Rent").attr('class', 'title');
 
           // append the SVG tag with height and width to accommodate for margins
           var svg = d3.select("body")
@@ -112,6 +109,7 @@
                 .range([height, 0])
                 .domain([0, max_y]);
 
+            debugger;
             // Create D3 axis object from time_scale for the x-axis
             var time_axis = d3.svg.axis()
                 .scale(time_scale)
@@ -155,6 +153,32 @@
                 .attr('height', function(d) {
                     return height - measure_scale(+d[field]);
                 });
+
+                svg.selectAll("circle")
+              .data(data)
+              .enter()
+              .append("circle")
+
+
+                d3.selectAll('circle')
+                .attr('cx', function(d) {
+                    return time_scale(format.parse(d['month']));
+                })
+                .attr('cy', function(d) {
+                    return measure_scale(+d[field]);
+                })
+                .attr('r', 3);
+
+                // define the values to map for x and y position of the line
+            var line = d3.svg.line()
+                         .x(function(d) { return time_scale(format.parse(d['month'])); })
+                         .y(function(d) { return measure_scale(+d[field]); });
+
+            // append a SVG path that corresponds to the line chart
+            svg.append("path")
+              .datum(data)
+              .attr("class", "line")
+              .attr("d", line);
         };
       </script>
   </head>
@@ -162,7 +186,7 @@
     <script type="text/javascript">
     // load our data file asynchronously and pass the data
     // to the draw function once it is loaded.
-    d3.csv("../data/zillow_median_rent_pct_sf.csv", draw);
+    d3.csv("../data/zillow_sf.csv", draw);
     </script>
   </body>
 </html>
